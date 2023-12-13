@@ -1,0 +1,141 @@
+version: "3.8"
+
+services:
+  eureka:
+    build: .\EurekaDiscov
+    ports:
+      - "8761:8761"
+    container_name: eureka
+    image: "eureka"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  foyer:
+    build: .\foyeer
+    ports:
+      - "8071:8071"
+    container_name: foyer
+    image: "foyer"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-foyer:3306/foyeer?useUnicode=true&useJDBCCompliantTimezoneShift=true&createDatabaseIfNotExist=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    depends_on:
+      - docker-mysql_1
+      - eureka
+
+  docker-mysql_1:
+    image: "mysql:5.6"
+    container_name: db-foyer
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=
+      - MYSQL_DATABASE=foyeer
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "3307:3306"  # Port 3307 sur votre machine est mappé au port 3306 à l'intérieur du conteneur
+
+  reservation:
+    build: .\reservationn
+    ports:
+      - "8072:8072"
+    container_name: reservation
+    image: "reservation"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-reservation:3306/reservation?useUnicode=true&useJDBCCompliantTimezoneShift=true&createDatabaseIfNotExist=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    depends_on:
+      - docker-mysql_2
+      - eureka
+
+  docker-mysql_2:
+    image: "mysql:5.6"
+    container_name: db-reservation
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=
+      - MYSQL_DATABASE=reservation
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "3308:3306"  # Port 3308 sur votre machine est mappé au port 3306 à l'intérieur du conteneur
+
+  chambre:
+    build: .\Chambre
+    ports:
+      - "8077:8077"
+    container_name: chambre
+    image: "chambre"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-chambre:3306/chambre?useUnicode=true&useJDBCCompliantTimezoneShift=true&createDatabaseIfNotExist=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    depends_on:
+      - docker-mysql-3
+      - eureka
+
+  docker-mysql-3:
+    image: "mysql:5.6"
+    container_name: db-chambre
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=
+      - MYSQL_DATABASE=chambre
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "3309:3306"
+
+  universite:
+    build: .\UniversiteMicroService
+    ports:
+      - "8070:8070"
+    container_name: universite
+    image: "universite"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:./Database/Data/Universite
+    depends_on:
+      - eureka
+
+  etudiant:
+    build: .\etudiant
+    ports:
+      - "8073:8073"
+    container_name: etudiant
+    image: "etudiant"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:./Database/Data/etudiant
+    depends_on:
+      - eureka
+
+  bloc:
+    build: .\Bloc
+    ports:
+      - "8074:8074"
+    container_name: bloc
+    image: "bloc"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:./Database/Data/Bloc
+    depends_on:
+      - eureka
+
+
+  gateway:
+    build: .\gateway
+    ports:
+      - "8076:8076"
+    container_name: gateway
+    image: "gateway"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+    depends_on:
+      - "eureka"
+      - "foyer"
+      - "universite"
+      - "reservation"
+      - "bloc"
+      - "etudiant"
+    networks:
+      - mynetwork
+    volumes:
+      - ./APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar:/app.jar
+    command: ["java", "-jar", "/app.jar"]
+
+networks:
+  mynetwork:
