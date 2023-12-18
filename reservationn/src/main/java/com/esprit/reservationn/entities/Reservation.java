@@ -20,14 +20,8 @@ public class Reservation {
     Boolean estValide;
     String statu;
 
-    /*@ManyToMany(mappedBy = "reservationSet", cascade= CascadeType. PERSIST ,fetch = FetchType.LAZY )
-   private List<Etudiant> etudiant ;*/
-/* @OneToOne
-Etudiant etudiant;*/
-    @ManyToOne
-    Chambre chambre;
-    @ManyToOne
-    Etudiant etudiant;
+
+
 }
 
 

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/reservationn/pom.xml" />
+        <option value="$PROJECT_DIR$/etudiant/pom.xml" />
+        <option value="$PROJECT_DIR$/Chambre/pom.xml" />
+        <option value="$PROJECT_DIR$/Bloc/pom.xml" />
+        <option value="$PROJECT_DIR$/EurekaDiscov/pom.xml" />
+        <option value="$PROJECT_DIR$/foyeer/pom.xml" />
+        <option value="$PROJECT_DIR$/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/UniversiteMicroService/pom.xml" />
+      </list>
+    </option>
+    <option name="workspaceImportForciblyTurnedOn" value="true" />
+  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

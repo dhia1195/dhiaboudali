@@ -24,7 +24,6 @@ public class Etudiant {
     String ecole;
     @Temporal(TemporalType.DATE)
     Date dateNaissance;
-    @ManyToMany
-    Set<Reservation> reservations;
+
 
 }

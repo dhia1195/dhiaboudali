@@ -1,0 +1,93 @@
+<div class="position-relative">
+  <!-- Header -->
+  <div class="header bg-gradient-danger pb-6 pt-3 pt-md-6 text-center text-white">
+    <div class="container-fluid">
+      <div class="header-body">
+        <h1 class="display-3 text-white">Liste des chambres </h1>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid  p-5 ">
+  <div class="row my-4">
+    <div class="col-auto">
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" [(ngModel)]="searchTerm" class="form-control form-control-sm " placeholder="cherchez une chambre" />
+
+        </div>
+        <button type="button" class="btn btn-primary btn-search" data-mdb-ripple-init>
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-auto mx-auto"> <!-- Utilisation de 'mx-auto' pour centrer horizontalement -->
+      
+    </div>
+    <div class="col-auto">
+      
+    </div>
+    <div class="col-auto">
+      <div class="container">
+        <div class="row">
+          <b class="col-auto my-auto">Ajouter Chambre</b>
+          <div class="col-auto">
+            <button routerLink="/chambre-add" class="btn btn-primary rounded-circle ml-2 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px">
+              <i class="fa fa-plus text-white"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">numero</th>
+          <th scope="col">type</th>
+          <th scope="col">actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ch of filteredChambres">
+          <td>{{ ch.idChambre}}</td>
+          <td>{{ ch.numChambre }}</td>
+          <td>{{ ch.type }}</td>
+          <td>
+            <button (click)="deletechambre(ch)" class="btn btn-danger">
+              Supprimer
+            </button>
+  
+            <button
+              routerLink="../chambre-update/{{ch.idChambre}}"
+              class="btn btn-primary"
+            >
+              Modifier
+          </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <style>
+  .btn-search {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .btn-dhia {
+  color: red;
+}
+  .btn-secondary {
+  margin-top: 15px; /* Ajustez selon votre mise en page */
+}
+ul.logs-list li {
+  color: darkred;
+}
+</style>
+  

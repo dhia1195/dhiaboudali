@@ -125,17 +125,18 @@ services:
     environment:
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
     depends_on:
-      - "eureka"
-      - "foyer"
-      - "universite"
-      - "reservation"
-      - "bloc"
-      - "etudiant"
-    networks:
-      - mynetwork
-    volumes:
-      - ./APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar:/app.jar
-    command: ["java", "-jar", "/app.jar"]
+      - eureka
+#      - "foyer"
+#      - "universite"
+#      - "reservation"
+#      - "bloc"
+#      - "etudiant"
+#    networks:
+#      - mynetwork
+#    volumes:
+#      - ./APIGateway/target/APIGateway-0.0.1-SNAPSHOT.jar:/app.jar
+#    command: ["java", "-jar", "/app.jar"]
 
-networks:
-  mynetwork:
+#networks:
+#  mynetwork:
+

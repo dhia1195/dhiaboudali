@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Freelancers{% endblock %}
+{% block css%}
+<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
+<link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
+<link href="{{asset('fonts/icon-7-stroke/css/pe-icon-7-stroke.css')}}" rel="stylesheet">
+<link href="{{asset('css/animate.css')}}" rel="stylesheet" media="screen">
+<link href="{{asset('css/owl.theme.css')}}" rel="stylesheet">
+<link href="{{asset('css/owl.carousel.css')}}" rel="stylesheet">
+ 
+<link href="{{asset('css/styles.css')}}" rel="stylesheet" media="screen">    
+
+<!-- Google Fonts --> 
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:100,300,400,700' rel='stylesheet' type='text/css'>
+<style type="text/css">
+body{margin-top:20px;
+background-color:#eee;
+}
+.card {
+    margin-bottom: 24px;
+    box-shadow: 0 2px 3px #e4e8f0;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #eff0f2;
+    border-radius: 1rem;
+    padding : 20px;
+}
+.avatar-md {
+    height: 4rem;
+    width: 4rem;
+}
+.rounded-circle {
+    border-radius: 50%!important;
+}
+.img-thumbnail {
+    padding: 0.25rem;
+    background-color: #f1f3f7;
+    border: 1px solid #eff0f2;
+    border-radius: 0.75rem;
+}
+.avatar-title {
+    align-items: center;
+    background-color: #3b76e1;
+    color: #fff;
+    display: flex;
+    font-weight: 500;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+.bg-soft-primary {
+    background-color: rgba(59,118,225,.25)!important;
+}
+a {
+    text-decoration: none!important;
+}
+.badge-soft-danger {
+    color: #f56e6e !important;
+    background-color: rgba(245,110,110,.1);
+}
+.badge-soft-success {
+    color: #63ad6f !important;
+    background-color: rgba(99,173,111,.1);
+}
+.mb-0 {
+    margin-bottom: 0!important;
+}
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 75%;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.75rem;
+}
+
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css" integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+
+
+{% endblock %} 
+
+{% block body %}
+        
+      {% for utilisateur in utilisateurs %}
+        
+        <div class="col-xl-3 col-sm-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div>
+                        {% if(utilisateur.cv is null) %}
+                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="avatar-md rounded-circle img-thumbnail" />
+                        {% else %}
+                        <img src="{{ asset('/uploads_img/'~utilisateur.cv.img) }}" alt="" class="avatar-md rounded-circle img-thumbnail" />
+                        {% endif %}
+                        </div>
+                        <div class="flex-1 ms-3">
+                            <h5 class="font-size-16 mb-1"><a href="#" class="text-dark">{{ utilisateur.nom }} {{ utilisateur.prenom }}</a></h5>
+                            <span class="badge badge-soft-success mb-0">{{ utilisateur.domaine.nom }}</span>
+                        </div>
+                    </div>
+                    <div class="mt-3 pt-1">
+                        <p class="text-muted mb-0"><i class="mdi mdi-phone font-size-15 align-middle pe-2 text-primary"></i> {{ utilisateur.numtel }}</p>
+                        <p class="text-muted mb-0 mt-2"><i class="mdi mdi-email font-size-15 align-middle pe-2 text-primary"></i> {{ utilisateur.email }}</p>
+                        <!--<p class="text-muted mb-0 mt-2"><i class="mdi mdi-google-maps font-size-15 align-middle pe-2 text-primary"></i> 80 South Street MONKW 7BR</p>-->
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ path('app_utilisateur_show', {'id': utilisateur.id}) }}"><button type="button" class="btn btn-primary btn-sm w-50"> Voir Profile</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    {% else %}
+            <h4 colspan="10">no records found</h4>
+        {% endfor %}
+    <!--<div class="row g-0 align-items-center pb-4">
+        <div class="col-sm-6">
+            <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
+        </div>
+        <div class="col-sm-6">
+            <div class="float-sm-end">
+                <ul class="pagination mb-sm-0">
+                    <li class="page-item disabled">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+                    </li>
+                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
+                    <li class="page-item"><a href="#" class="page-link">2</a></li>
+                    <li class="page-item"><a href="#" class="page-link">3</a></li>
+                    <li class="page-item"><a href="#" class="page-link">4</a></li>
+                    <li class="page-item"><a href="#" class="page-link">5</a></li>
+                    <li class="page-item">
+                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>-->
+    <div class="d-flex justify-content-center">
+        {% do utilisateurs.setPageRange(2) %}
+        {{ knp_pagination_render(utilisateurs, 'utilisateur/paginator.html.twig') }}
+    </div>    
+{% endblock %}

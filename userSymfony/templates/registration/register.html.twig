@@ -1,0 +1,118 @@
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Register</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <link rel="stylesheet" href="{{asset('SignUp/css/style.css')}}">
+    </head>
+<body>
+    {% include '_partials/_flash.html.twig' %}
+    <section class="ftco-section">
+		<div class="container">
+			
+			<div class="row justify-content-center">
+				<div class="col-md-12 col-lg-10">
+					<div class="wrap d-md-flex">
+						<div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
+							<div class="text w-100">
+								<h2>Welcome to Sign Up</h2>
+								<p>Already have an account</p>
+								<a href="{{ path('app_login') }}" class="btn btn-white btn-outline-white">Sign In</a>
+							</div>
+			      </div>
+						<div class="login-wrap p-4 p-lg-5">
+			      	<div class="d-flex">
+			      		<div class="w-100">
+			      			<h3 class="mb-4">Sign Up</h3>
+			      		</div>
+								
+			      	</div>
+                    {{ form_start(registrationForm) }}
+							<form action="#" method="POST" class="signin-form">
+			      		<div class="form-group mb-3">
+			      			<label class="label" for="login">Username</label>
+			      			{{ form_widget(registrationForm.login, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(registrationForm.login) }}
+			      		</div>
+                        <div class="form-group mb-3">
+                            <label class="label" for="mail">Email</label>
+                        {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                         {{ form_errors(registrationForm.email) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="label" for="nom">Nom</label>
+                        {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                         {{ form_errors(registrationForm.nom) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="label" for="prenom">Prenom</label>
+                        {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                         {{ form_errors(registrationForm.prenom) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="label" for="adresse">Adresse</label>
+                       {{ form_widget(registrationForm.adresse, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(registrationForm.adresse) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="label" for="numtel">Numero Tel</label>
+                        {{ form_widget(registrationForm.numtel, {'attr': {'class': 'form-control'}}) }}
+                         {{ form_errors(registrationForm.numtel) }}
+                        </div>
+
+						<div class="form-group mb-3">
+                            <label class="label" for="numtel">Domaine</label>
+                        {{ form_widget(registrationForm.domaine, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+						<div class="form-group mb-3">
+                            <label class="label" for="numtel">Account Type</label>
+                        {{ form_widget(registrationForm.role, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+		            <div class="form-group mb-3">
+		            	<label class="label" for="password">Password</label>
+		              {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                       {{ form_errors(registrationForm.plainPassword) }}
+		            </div>
+                    {#<div class="col-12">
+                                        <label class="custom_check mr-2 mb-0"> I agree to the <a href="#"
+                                                class="text-primary"> terms of service</a> and <a href="#"
+                                                class="text-primary">privacy policy</a>
+                                           
+											{{ form_widget(registrationForm.agreeTerms, {attr:{'class':'custom_check mr-2 mb-0'}}) }}
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+		            <div class="form-group">#}
+		            	<button type="submit" class="form-control btn btn-primary submit px-3">Sign Up</button>
+                    
+
+		            </div>
+		            {{ form_end(registrationForm) }}
+		          </form>
+		        </div>
+		      </div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <script src="{{asset('SignUp/js/jquery.min.js')}}"></script>
+    <script src="{{asset('SignUp/js/popper.js')}}"></script>
+    <script src="{{asset('SignUp/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('SignUp/js/main.js')}}"></script>
+</body>
+
+

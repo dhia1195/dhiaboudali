@@ -9,16 +9,14 @@ import java.util.List;
 
 public interface IReservationService {
 
-    Reservation add(Reservation reservation);
-    Reservation ajouterReservationEtAssignerAChambreEtAEtudiant(long numChambre, long cin);
-    List<Reservation> getReservationParAnneeUniversitaire(LocalDate debutAnnee, LocalDate finAnnee);
-    List<Reservation> getAll();
-    Reservation getById(String id);
-    Reservation updateReservation(Reservation res);
+    List<Reservation> retrieveAllReservation();
+    Reservation addReservation(Reservation b);
+    Reservation updateReservation (Reservation b);
+    List<Reservation> delete (Reservation reservation);
+    public void deleteReservation (String idReservation);
+    }
 
-    ResponseEntity<String> annulerReservation(String idReservation);
 
-    ResponseEntity<String> validerReservation(String idReservation);
-}
+
 
 

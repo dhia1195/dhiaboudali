@@ -15,57 +15,24 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/reservation")
+@RequestMapping("/reservations")
 @CrossOrigin(origins = "*")
 public class ReservationRestController {
     IReservationService ireservationservice;
 
-    @GetMapping("/getByAnneeUniversitaire/{deb}/{fin}")
-    public List<Reservation> getReservationbyAnneeUniversitaire(
-            @PathVariable("deb") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate debutAnnee,
-            @PathVariable("fin") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate finAnnee
-    ) {
-        return ireservationservice.getReservationParAnneeUniversitaire(debutAnnee, finAnnee);
-    }
+    @GetMapping("/afficheruniversites")
+    List<Reservation> retrieveAllReservation(){
 
-    @GetMapping("/getAll")//
-    public List<Reservation> getAllReservations() {
-        return ireservationservice.getAll();
+        return ireservationservice.retrieveAllReservation();
     }
+    @PostMapping("/ajouteruniversite")
+    Reservation addUniversite(@RequestBody Reservation c){return ireservationservice.addReservation(c);}
+    @PutMapping("/modifieruniversite")
+    Reservation updateReservation (@RequestBody Reservation c){return ireservationservice.updateReservation(c);}
 
-    @GetMapping("/getById/{id}")
-    public Reservation getReservationById(@PathVariable("id") String id) {
-        return ireservationservice.getById(id);
-    }
-
-    @PostMapping("/add/{numChambre}/{cin}")//
-    public ResponseEntity<Reservation>
-    ajouterReservationEtAssignerAChambreEtAEtudiant(
-            @PathVariable("numChambre") long numChambre,
-            @PathVariable("cin") long cin
-    ) {
-        return ResponseEntity.ok(ireservationservice.ajouterReservationEtAssignerAChambreEtAEtudiant(numChambre, cin));
-    }
-
-    @PostMapping("/annulerReservation/{idReservation}")//a modifoer fi service
-    public ResponseEntity<String>
-    annulerReservation(
-            @PathVariable("idReservation") String idReservation
-    ) {
-        return ireservationservice.annulerReservation(idReservation);
-    }
-
-    @PostMapping("/validerReservation/{idReservation}")
-    public ResponseEntity<String>
-    validerReservation(
-            @PathVariable("idReservation") String idReservation
-    ) {
-        return ireservationservice.validerReservation(idReservation);
-    }
-
-    @PutMapping("/update")//
-    public ResponseEntity<Reservation> updateUniversite(@RequestBody Reservation reservation){
-        return ResponseEntity.ok(ireservationservice.updateReservation(reservation));
+    @DeleteMapping("/deleteReservation/{id}")
+    public void deleteReservation(@PathVariable ("id") String idReservation){
+        ireservationservice.deleteReservation(idReservation);
     }
 
 }
